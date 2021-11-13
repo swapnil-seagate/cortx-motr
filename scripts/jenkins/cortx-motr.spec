@@ -57,9 +57,9 @@
 %define  configure_opts  %{configure_release_opts} %{?configure_cassandra_opts}
 %endif
 
-Name:           @PACKAGE@
-Version:        @PACKAGE_VERSION@
-Release:        %{build_num}_@GIT_REV_ID_RPM@_%{kernel_ver}%{?dist}
+Name:           111
+Version:        111
+Release:        %{build_num}_111_%{kernel_ver}%{?dist}
 Summary:        CORTX Motr
 Group:          System Environment/Base
 License:        Seagate
