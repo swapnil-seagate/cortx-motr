@@ -1277,6 +1277,15 @@ static void usage(void)
         printf("\n");
 }
 
+void wait_for_user(void)
+{
+        FILE *fd;
+        char *stub_file = "/etc/cortx/motr/waitforcompletion";
+        char ch;
+        fd = fopen(stub_file, "r");
+        fread(&ch, sizeof(ch), sizeof(ch), fd);
+}
+
 void print_workload_detail(struct workload *w, int idx)
 {
 	int i;
@@ -1461,6 +1470,7 @@ int main(int argc, char **argv)
                 cr_log(CLL_INFO, "done workload %i\n", i);
                 cr_log(CLL_INFO, "---------------------------------------\n");
         }
+        wait_for_user();
 	m0_free(load);
         return 0;
 }
