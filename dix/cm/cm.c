@@ -21,6 +21,7 @@
 
 
 #define M0_TRACE_SUBSYSTEM M0_TRACE_SUBSYS_DIXCM
+#include<unistd.h>
 #include "lib/memory.h"
 #include "lib/assert.h"
 #include "lib/errno.h"
@@ -550,7 +551,7 @@ M0_INTERNAL int m0_dix_cm_data_next(struct m0_cm *cm, struct m0_cm_cp *cp)
 
 	/* Inc progress counter. */
 	dcm->dcm_processed_nr++;
-
+        sleep(30);
 	if (cm->cm_quiesce || cm->cm_abort) {
 		M0_LOG(M0_WARN, "%" PRId64 ": Got %s cmd: returning -ENODATA",
 				 cm->cm_id,
