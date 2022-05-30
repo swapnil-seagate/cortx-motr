@@ -746,14 +746,20 @@ M0_INTERNAL int m0_fom_timedwait(struct m0_fom *fom, uint64_t phases,
  */
 static void cb_done(struct m0_fom_callback *cb)
 {
+        int rc;
 	struct m0_clink *clink = &cb->fc_clink;
-
+        M0_LOG(M0_WARN,"Swapnil 1");
 	M0_PRE(cb->fc_state == M0_FCS_ARMED);
+        M0_LOG(M0_WARN,"Swapnil 2 Pre passed");
 
+	rc = !m0_clink_is_armed(clink);
+        M0_LOG(M0_WARN,"Swapnil 3 rc = %d",rc);
 	M0_ASSERT(!m0_clink_is_armed(clink));
 	cb->fc_state = M0_FCS_DONE;
+        M0_LOG(M0_WARN,"Swapnil 4 Chanding state to Done");
 
 	M0_POST(m0_fom_invariant(cb->fc_fom));
+        M0_LOG(M0_WARN,"Swapnil 5 Function completed");
 }
 
 /**
