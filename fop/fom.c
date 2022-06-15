@@ -761,12 +761,14 @@ static void cb_done(struct m0_fom_callback *cb)
 {
 	struct m0_clink *clink = &cb->fc_clink;
 
-	M0_PRE(cb->fc_state == M0_FCS_ARMED);
-
-	M0_ASSERT(!m0_clink_is_armed(clink));
+	//M0_PRE(cb->fc_state == M0_FCS_ARMED);
+	M0_ASSERT_INFO(cb->fc_state == M0_FCS_ARMED, "Swapnil state = %d", cb->fc_state);
+	//M0_ASSERT(!m0_clink_is_armed(clink));
+	M0_ASSERT_INFO(!m0_clink_is_armed(clink), "ASSERT HERE Swapnil 2");
 	cb->fc_state = M0_FCS_DONE;
 
-	M0_POST(m0_fom_invariant(cb->fc_fom));
+	//M0_POST(m0_fom_invariant(cb->fc_fom));
+	M0_ASSERT_INFO(m0_fom_invariant(cb->fc_fom), "Assert HEre Swapnil 3 State = %d", cb->fc_state);
 }
 
 /**
