@@ -757,18 +757,30 @@ M0_INTERNAL int m0_fom_timedwait(struct m0_fom *fom, uint64_t phases,
 /**
  * Helper function advancing a fom call-back from ARMED to DONE state.
  */
+//M0_TL_DESCR_DECLARE(m_tlink, M0_EXTERN);
+//M0_TL_DECLARE(m_tlink, M0_EXTERN, struct m0_tlink );
 static void cb_done(struct m0_fom_callback *cb)
 {
+	int rc;
 	struct m0_clink *clink = &cb->fc_clink;
 
 	//M0_PRE(cb->fc_state == M0_FCS_ARMED);
 	M0_ASSERT_INFO(cb->fc_state == M0_FCS_ARMED, "Swapnil state = %d", cb->fc_state);
 	//M0_ASSERT(!m0_clink_is_armed(clink));
-	M0_ASSERT_INFO(!m0_clink_is_armed(clink), "ASSERT HERE Swapnil 2");
+	/*m0_tl_for(m_tlink,&cb->fc_clink.cl_chan.ch_links, cl_linkage)
+	{
+		M0_LOG(M0_DEBUG, "");
+		*cb->fc_clink.cl_linkage.t_link.ll_next
+
+
+	}m0_tl_endfor;*/
+	rc = m0_clink_is_armed(clink);
+	M0_ASSERT_INFO(!rc, "Swapnil 2 fc_state= %d rc = %d", cb->fc_state, rc);
 	cb->fc_state = M0_FCS_DONE;
 
 	//M0_POST(m0_fom_invariant(cb->fc_fom));
-	M0_ASSERT_INFO(m0_fom_invariant(cb->fc_fom), "Assert HEre Swapnil 3 State = %d", cb->fc_state);
+	rc = m0_fom_invariant(cb->fc_fom);
+	M0_ASSERT_INFO(rc, "Assert HEre Swapnil 3 State = %d rc = %d", cb->fc_state,rc);
 }
 
 /**
