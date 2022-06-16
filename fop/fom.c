@@ -780,7 +780,7 @@ static void cb_done(struct m0_fom_callback *cb)
 
 	//M0_POST(m0_fom_invariant(cb->fc_fom));
 	rc = m0_fom_invariant(cb->fc_fom);
-	M0_ASSERT_INFO(rc, "Assert HEre Swapnil 3 State = %d rc = %d", cb->fc_state,rc);
+	M0_ASSERT_INFO(rc, "Assert Here Swapnil 3 State = %d rc = %d", cb->fc_state,rc);
 }
 
 /**
