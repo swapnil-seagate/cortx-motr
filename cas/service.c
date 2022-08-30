@@ -1437,7 +1437,7 @@ static int cas_fom_tick(struct m0_fom *fom0)
 			else
 				m0_fom_phase_set(fom0, CAS_CHECK);
 		} else
-			m0_fom_phase_move(fom0, M0_ERR(rc), M0_FOPH_FAILURE);
+			m0_fom_phase_move(fom0, M0_RC(rc), M0_FOPH_FAILURE);
 		break;
 	case CAS_CHECK:
 		rc = cas_op_check(op, fom, is_index_drop);
